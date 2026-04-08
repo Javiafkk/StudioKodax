@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Rocket } from "lucide-react";
+import { Menu, Rocket } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -20,8 +20,11 @@ const navMain = [
   { href: "/blog", label: "Blog" },
 ] as const;
 
-const navMobile = [
-  ...navMain,
+/** Móvil: enlaces dentro del menú hamburguesa (Servicios va aparte, centrado). */
+const navMobileMenu = [
+  { href: "/#caso-destacado", label: "Caso destacado" },
+  { href: "/#resenas", label: "Reseñas" },
+  { href: "/blog", label: "Blog" },
   { href: "/contacto", label: "Contacto" },
 ] as const;
 
@@ -62,23 +65,35 @@ export function SiteHeader() {
         >
           StudioKodax
         </Link>
-        <nav
-          aria-label="Principal"
-          className="hidden justify-self-center md:block"
-        >
-          <ul className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-            {navMain.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={cn(headerNavBtnBase, headerNavBtnSecondary)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex justify-center justify-self-center">
+          <nav
+            aria-label="Principal"
+            className="hidden md:block"
+          >
+            <ul className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+              {navMain.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={cn(headerNavBtnBase, headerNavBtnSecondary)}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <Link
+            href="/servicios"
+            className={cn(
+              headerNavBtnBase,
+              headerNavBtnSecondary,
+              "md:hidden",
+            )}
+          >
+            Servicios
+          </Link>
+        </div>
         <div className="flex items-center justify-end gap-4 sm:gap-6">
           <nav aria-label="Contacto" className="hidden md:block">
             <Link
@@ -104,13 +119,14 @@ function MobileNav() {
           className={cn(
             headerNavBtnBase,
             headerNavBtnSecondary,
-            "cursor-pointer list-none",
+            "flex h-10 w-10 cursor-pointer list-none items-center justify-center p-0 [&::-webkit-details-marker]:hidden",
           )}
+          aria-label="Abrir menú de navegación"
         >
-          Menú
+          <Menu className="h-5 w-5 shrink-0" aria-hidden />
         </summary>
-        <ul className="absolute right-0 mt-2 min-w-[12rem] space-y-1 rounded-lg border bg-popover p-2 shadow-lg">
-          {navMobile.map((item) => (
+        <ul className="absolute right-0 z-50 mt-2 min-w-[12rem] space-y-1 rounded-lg border bg-popover p-2 shadow-lg">
+          {navMobileMenu.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
