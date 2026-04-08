@@ -2,27 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { blogPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Artículos sobre desarrollo web, SEO técnico, Core Web Vitals y rendimiento con Next.js.",
+    "Guías prácticas sobre web para negocios en España: tráfico, SEO técnico, rendimiento y qué hacer cuando tu sitio no genera consultas.",
 };
-
-const placeholders = [
-  {
-    slug: "ejemplo-core-web-vitals",
-    title: "[Artículo] Core Web Vitals en proyectos Next.js",
-    excerpt:
-      "Marcador de posición: introduce aquí un resumen del post sobre LCP, INP y CLS.",
-  },
-  {
-    slug: "ejemplo-schema-markup",
-    title: "[Artículo] Schema.org sin romper el bundle",
-    excerpt:
-      "Marcador: JSON-LD, validación y patrones recomendados en el App Router.",
-  },
-] as const;
 
 export default function BlogPage() {
   return (
@@ -30,12 +16,13 @@ export default function BlogPage() {
       <header className="mx-auto max-w-3xl text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Blog</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Contenido técnico para quienes quieren medir, no solo publicar.
+          Contenido para quien tiene una web (o va a tenerla) y quiere entender qué
+          mueve visitas y consultas reales, sin humo.
         </p>
       </header>
 
       <ul className="mt-14 grid gap-6 sm:grid-cols-2">
-        {placeholders.map((post) => (
+        {blogPosts.map((post) => (
           <li key={post.slug}>
             <Card className="h-full transition-shadow hover:shadow-md">
               <CardHeader>
@@ -47,16 +34,24 @@ export default function BlogPage() {
                     {post.title}
                   </Link>
                 </CardTitle>
-                <CardDescription>{post.excerpt}</CardDescription>
+                <CardDescription>{post.description}</CardDescription>
+                <p className="pt-2 text-xs text-muted-foreground">
+                  <time dateTime={post.datePublished}>
+                    {new Date(post.datePublished + "T12:00:00").toLocaleDateString(
+                      "es-ES",
+                      {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      },
+                    )}
+                  </time>
+                </p>
               </CardHeader>
             </Card>
           </li>
         ))}
       </ul>
-      <p className="mt-10 text-center text-sm text-muted-foreground">
-        Las rutas <code className="rounded bg-muted px-1 py-0.5 text-xs">/blog/[slug]</code>{" "}
-        puedes añadirlas cuando tengas el modelo de contenido (MDX, CMS, etc.).
-      </p>
     </div>
   );
 }

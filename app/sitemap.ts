@@ -2,11 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { SITE_URL } from "@/lib/site";
 
-/** Slugs publicados en app/blog/[slug]/page.tsx (mantener alineado al añadir posts). */
-const blogSlugs = [
-  "ejemplo-core-web-vitals",
-  "ejemplo-schema-markup",
-] as const;
+import { blogPosts } from "@/lib/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -33,12 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const blogPosts: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${SITE_URL}/blog/${slug}`,
+  const blogEntries: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
     lastModified,
     changeFrequency: "monthly" as const,
-    priority: 0.6,
+    priority: 0.65,
   }));
 
-  return [...staticRoutes, ...blogPosts];
+  return [...staticRoutes, ...blogEntries];
 }
