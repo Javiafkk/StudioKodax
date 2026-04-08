@@ -36,10 +36,9 @@ export default function AvisoLegalPage() {
             </li>
             <li>
               <strong className="text-foreground">
-                Titular (complete con su asesoría):
+                Titular :
               </strong>{" "}
-              nombre o razón social, NIF/NIE o CIF, y domicilio a efectos
-              legales.
+              StudioKodax
             </li>
             <li>
               <strong className="text-foreground">Correo de contacto:</strong>{" "}
@@ -126,11 +125,6 @@ export default function AvisoLegalPage() {
           </p>
         </section>
 
-        <p className="border-t border-border pt-6 text-xs text-muted-foreground">
-          Este texto tiene carácter informativo y no sustituye el asesoramiento
-          jurídico personalizado. Revísalo con un profesional antes de publicar
-          datos fiscales o societarios definitivos.
-        </p>
       </div>
     </article>
   );

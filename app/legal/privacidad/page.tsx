@@ -232,11 +232,6 @@ export default function PrivacidadPage() {
           </p>
         </section>
 
-        <p className="border-t border-border pt-6 text-xs text-muted-foreground">
-          Documento orientativo. Un abogado especializado puede afinar la base
-          jurídica, el plazo de conservación y las cláusulas según su situación
-          concreta (autónomo, sociedad, volumen de datos, etc.).
-        </p>
       </div>
     </article>
   );

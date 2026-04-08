@@ -159,11 +159,6 @@ export default function CookiesPage() {
           </p>
         </section>
 
-        <p className="border-t border-border pt-6 text-xs text-muted-foreground">
-          Si incorpora analítica, mapas embebidos, vídeos de terceros o banners,
-          revise con su asesoría si debe mostrar un banner de consentimiento y
-          actualizar la lista de cookies con nombre, titular y finalidad.
-        </p>
       </div>
     </article>
   );
