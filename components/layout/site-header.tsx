@@ -125,7 +125,7 @@ function MobileNav() {
         >
           <Menu className="h-5 w-5 shrink-0" aria-hidden />
         </summary>
-        <ul className="absolute right-0 z-50 mt-2 min-w-[12rem] space-y-1 rounded-lg border bg-popover p-2 shadow-lg">
+        <ul className="absolute right-0 z-[100] mt-2 min-w-[12rem] space-y-1 rounded-lg border border-border bg-popover p-2 text-popover-foreground shadow-xl ring-1 ring-black/5">
           {navMobileMenu.map((item) => (
             <li key={item.href}>
               <Link
