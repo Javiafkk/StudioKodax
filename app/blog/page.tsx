@@ -7,7 +7,7 @@ import { blogPosts } from "@/lib/blog";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Guías prácticas sobre web para negocios en España: tráfico, SEO técnico, rendimiento y qué hacer cuando tu sitio no genera consultas.",
+    "Artículos de StudioKodax sobre web, SEO técnico y captación en España. Pensados para decidir mejor —y con una vía clara si quieres que revise tu proyecto.",
 };
 
 export default function BlogPage() {
@@ -16,8 +16,15 @@ export default function BlogPage() {
       <header className="mx-auto max-w-3xl text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Blog</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Contenido para quien tiene una web (o va a tenerla) y quiere entender qué
-          mueve visitas y consultas reales, sin humo.
+          Ideas y criterios profesionales sobre web y visibilidad. Si tras leer
+          quieres una lectura sobre tu caso,{" "}
+          <Link
+            href="/contacto"
+            className="font-medium text-foreground underline-offset-4 hover:underline"
+          >
+            escríbeme
+          </Link>
+          .
         </p>
       </header>
 

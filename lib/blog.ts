@@ -18,10 +18,11 @@ export type BlogPostMeta = {
 export const blogPosts: BlogPostMeta[] = [
   {
     slug: "mi-web-no-recibe-visitas",
-    title: "Mi web no recibe visitas: causas habituales y qué hacer",
+    title: "Mi web no recibe visitas: cómo lo abordo como profesional",
     description:
-      "Si tu página casi no tiene tráfico, no siempre el problema es el diseño. Repasamos indexación, Google, contenido y expectativas realistas antes de invertir en más publicidad.",
+      "Si tu página casi no tiene tráfico, el diagnóstico importa más que el rediseño a ciegas. Marco técnico, intención de búsqueda y contexto del negocio —y cómo te puedo ayudar desde StudioKodax.",
     datePublished: "2026-04-07",
+    dateModified: "2026-04-08",
   },
 ];
 

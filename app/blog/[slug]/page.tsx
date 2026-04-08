@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BlogPostCta } from "@/components/blog/blog-post-cta";
 import { BlogPostingJsonLd } from "@/components/blog/blog-posting-json-ld";
 import { blogArticleBodies } from "@/content/blog/registry";
 import { getPostBySlug, blogPosts } from "@/lib/blog";
@@ -84,6 +85,7 @@ export default function BlogPostPage({ params }: Props) {
       </header>
       <div className="pt-10">
         <Body />
+        <BlogPostCta />
       </div>
     </article>
   );
