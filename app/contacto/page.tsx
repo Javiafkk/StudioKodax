@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
 
 import { ContactForm } from "@/components/contacto/contact-form";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
+
+const contactoDescription =
+  "Solicita presupuesto o consulta para tu web en España: proyecto nuevo desde cero o mejora de un sitio que no posiciona ni convierte. Respuesta con siguiente paso claro.";
 
 export const metadata: Metadata = {
-  title: "Contacto",
-  description:
-    "Cuéntame tu negocio y tu web: te respondo con ideas para ganar más consultas y clientes desde buscadores.",
+  title: "Presupuesto y consulta para tu web",
+  description: contactoDescription,
+  alternates: { canonical: "/contacto" },
+  openGraph: {
+    title: `Contacto y presupuesto web | ${SITE_NAME}`,
+    description: contactoDescription,
+    url: `${SITE_URL}/contacto`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contacto y presupuesto web | ${SITE_NAME}`,
+    description: contactoDescription,
+  },
 };
 
 export default function ContactoPage() {
@@ -13,16 +28,15 @@ export default function ContactoPage() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <header className="mx-auto max-w-2xl text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-          Contacto
+          Presupuesto y consulta para tu web
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Si quieres{" "}
+          Cuéntame si partimos de cero o si ya tienes web y{" "}
           <strong className="font-medium text-foreground">
-            más clientes o consultas desde tu web
+            no te está trayendo clientes
           </strong>
-          , empieza aquí: explícame qué vendes, qué te gustaría que pasara en
-          ideal (llamadas, formularios, reservas…) y en qué estado está tu sitio
-          ahora.
+          . Indica sector, objetivo (llamadas, formularios, reservas…) y, si
+          aplica, la URL. Te respondo con un siguiente paso claro.
         </p>
       </header>
 

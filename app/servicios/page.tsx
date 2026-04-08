@@ -3,12 +3,27 @@ import Link from "next/link";
 import { Check, Globe, ScanSearch } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+const serviciosDescription =
+  "Creación de páginas web para negocios y autónomos en España y auditoría SEO técnica si tu sitio no genera consultas. Dos packs: web nueva o diagnóstico priorizado.";
+
 export const metadata: Metadata = {
-  title: "Servicios",
-  description:
-    "Pack de creación de web y pack de auditoría técnica y SEO. Contratación clara, como producto digital.",
+  title: "Diseño web nueva y auditoría SEO técnica",
+  description: serviciosDescription,
+  alternates: { canonical: "/servicios" },
+  openGraph: {
+    title: `Diseño web y auditoría SEO | ${SITE_NAME}`,
+    description: serviciosDescription,
+    url: `${SITE_URL}/servicios`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Diseño web y auditoría SEO | ${SITE_NAME}`,
+    description: serviciosDescription,
+  },
 };
 
 const packs = [
@@ -58,7 +73,7 @@ export default function ServiciosPage() {
           Tienda de servicios
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-          Elige tu pack
+          Web nueva en España o auditoría de tu sitio actual
         </h1>
         <p className="mt-4 text-muted-foreground">
           Dos productos claros: te construyo la web o audito la que ya tienes.

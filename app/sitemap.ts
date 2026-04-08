@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://studiokodax.com";
+import { SITE_URL } from "@/lib/site";
 
 /** Slugs publicados en app/blog/[slug]/page.tsx (mantener alineado al añadir posts). */
 const blogSlugs = [
@@ -12,21 +12,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: siteUrl, lastModified, changeFrequency: "weekly", priority: 1 },
+    { url: SITE_URL, lastModified, changeFrequency: "weekly", priority: 1 },
     {
-      url: `${siteUrl}/servicios`,
+      url: `${SITE_URL}/servicios`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
-      url: `${siteUrl}/contacto`,
+      url: `${SITE_URL}/contacto`,
       lastModified,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${siteUrl}/blog`,
+      url: `${SITE_URL}/blog`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.8,
@@ -34,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const blogPosts: MetadataRoute.Sitemap = blogSlugs.map((slug) => ({
-    url: `${siteUrl}/blog/${slug}`,
+    url: `${SITE_URL}/blog/${slug}`,
     lastModified,
     changeFrequency: "monthly" as const,
     priority: 0.6,

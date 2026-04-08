@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { FaqSection } from "@/components/home/faq-section";
 import { FinalCtaSection } from "@/components/home/final-cta-section";
 import { HeroSection } from "@/components/home/hero-section";
 import { PainSolutionSection } from "@/components/home/pain-solution-section";
@@ -10,7 +11,7 @@ import { RevealOnView } from "@/components/motion/reveal-on-view";
 export const metadata: Metadata = {
   title: "Inicio",
   description:
-    "Tu web puede generar clientes: SEO técnico, velocidad y una base sólida. Auditoría gratuita y casos reales.",
+    "Webs nuevas para negocios y autónomos en España, o mejora de tu web si no vende ni posiciona. SEO técnico, velocidad y más consultas desde Google.",
 };
 
 export default function HomePage() {
@@ -25,6 +26,9 @@ export default function HomePage() {
       </RevealOnView>
       <RevealOnView>
         <SocialProofSection />
+      </RevealOnView>
+      <RevealOnView>
+        <FaqSection />
       </RevealOnView>
       <RevealOnView>
         <FinalCtaSection />

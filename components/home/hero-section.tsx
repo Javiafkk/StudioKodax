@@ -17,7 +17,7 @@ export function HeroSection() {
       </div>
       <div className="relative mx-auto max-w-3xl text-center motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-700 motion-safe:fill-mode-both">
         <p className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
-          StudioKodax · Desarrollo web orientado a negocio
+          StudioKodax · Webs en España para negocios y autónomos
         </p>
         <h1
           id="hero-heading"
@@ -26,8 +26,12 @@ export function HeroSection() {
           Una web hecha para traerte clientes, no solo para verse bien
         </h1>
         <p className="mt-6 text-lg text-muted-foreground sm:text-xl">
-          La gente te busca en Google; si tu sitio tarda, no se entiende o no
-          transmite confianza, pierdes consultas antes de hablar con ellos. Yo
+          Tanto si quieres <strong className="font-medium text-foreground">montar tu web desde cero</strong>{" "}
+          como si ya tienes una y{" "}
+          <strong className="font-medium text-foreground">no te funciona</strong> (poca
+          visibilidad, poca confianza o pocos contactos), el foco es el mismo: que te
+          encuentren y te escriban. La gente te busca en Google; si el sitio tarda, no
+          se entiende o no convence, pierdes consultas antes de hablar con ellos. Yo
           combino <strong className="font-medium text-foreground">SEO técnico</strong>,{" "}
           <strong className="font-medium text-foreground">velocidad</strong> y un
           desarrollo serio para que{" "}
