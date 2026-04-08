@@ -32,7 +32,7 @@ export const reviewSlides: ReviewSlide[] = [
     id: "2",
     source: "google",
     authorName: "Carlos Méndez",
-    timeAgo: "Hace 5 semanas",
+    timeAgo: "Hace 3 semanas",
     rating: 5,
     text:
       "Teníamos una web antigua que no posicionaba. Tras la nueva base técnica y el SEO, empezamos a recibir consultas desde Google sin depender solo del boca a boca.",
