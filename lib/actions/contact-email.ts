@@ -16,6 +16,11 @@ const MAX_LEN = {
   mensaje: 5000,
 } as const;
 
+/** Tiempo mínimo entre carga del formulario y envío (anti-bots sin JS). */
+const MIN_SUBMIT_MS = 2_000;
+/** Formulario demasiado antiguo (evita reenvíos con timestamp fijo). */
+const MAX_SUBMIT_MS = 2 * 60 * 60 * 1000;
+
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
@@ -30,10 +35,43 @@ function isValidOptionalUrl(value: string): boolean {
   }
 }
 
+/** Evita saltos de línea en cabeceras de correo. */
+function singleLine(value: string, max: number): string {
+  return value.replace(/[\r\n]+/g, " ").trim().slice(0, max);
+}
+
 export async function sendContactEmail(
   _prev: ContactFormState,
-  formData: FormData
+  formData: FormData,
 ): Promise<ContactFormState> {
+  const honeypot = String(formData.get("departamento") ?? "").trim();
+  if (honeypot.length > 0) {
+    return { ok: true, error: null };
+  }
+
+  const startedRaw = formData.get("formStartedAt");
+  const startedAt =
+    typeof startedRaw === "string" ? Number.parseInt(startedRaw, 10) : NaN;
+  if (!Number.isFinite(startedAt)) {
+    return {
+      ok: false,
+      error: "No se pudo validar el envío. Recarga la página e inténtalo de nuevo.",
+    };
+  }
+  const elapsed = Date.now() - startedAt;
+  if (elapsed < MIN_SUBMIT_MS) {
+    return {
+      ok: false,
+      error: "Espera un momento antes de enviar (protección anti-spam).",
+    };
+  }
+  if (elapsed > MAX_SUBMIT_MS) {
+    return {
+      ok: false,
+      error: "El formulario lleva demasiado tiempo abierto. Recarga la página.",
+    };
+  }
+
   const nombre = String(formData.get("nombre") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const web = String(formData.get("web") ?? "").trim();
@@ -63,7 +101,7 @@ export async function sendContactEmail(
 
   if (missing.length > 0) {
     console.error(
-      `Faltan variables de entorno: ${missing.join(", ")}. ¿Está .env.local en la raíz del proyecto y reiniciaste "npm run dev"?`
+      `Faltan variables de entorno: ${missing.join(", ")}. ¿Está .env.local en la raíz del proyecto y reiniciaste "npm run dev"?`,
     );
     const devHint =
       process.env.NODE_ENV === "development"
@@ -78,6 +116,7 @@ export async function sendContactEmail(
   }
 
   const resend = new Resend(apiKey);
+  const safeNombre = singleLine(nombre, MAX_LEN.nombre);
 
   const text = [
     `Nuevo mensaje desde el formulario de contacto`,
@@ -94,7 +133,7 @@ export async function sendContactEmail(
     from,
     to: [to],
     replyTo: email,
-    subject: `[Web] Contacto de ${nombre}`,
+    subject: `[Web] Contacto de ${safeNombre}`,
     text,
   });
 

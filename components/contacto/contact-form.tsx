@@ -16,15 +16,39 @@ import { ContactFormSubmit } from "./contact-form-submit";
 const initialState: ContactFormState = { ok: false, error: null };
 
 export function ContactForm() {
+  const [formKey, setFormKey] = React.useState(0);
+  const [startedAt, setStartedAt] = React.useState(() => Date.now());
   const [state, formAction] = useFormState(sendContactEmail, initialState);
-  const formRef = React.useRef<HTMLFormElement>(null);
 
   React.useEffect(() => {
-    if (state.ok) formRef.current?.reset();
+    if (state.ok) setFormKey((k) => k + 1);
   }, [state.ok]);
 
+  React.useEffect(() => {
+    if (formKey === 0) return;
+    setStartedAt(Date.now());
+  }, [formKey]);
+
   return (
-    <form ref={formRef} action={formAction} className="space-y-6">
+    <form key={formKey} action={formAction} className="relative space-y-6">
+      <input type="hidden" name="formStartedAt" value={String(startedAt)} readOnly />
+
+      {/* Honeypot: no rellenar (bots suelen autocompletar). */}
+      <div
+        className="pointer-events-none absolute -left-[9999px] top-0 h-px w-px overflow-hidden opacity-0"
+        aria-hidden="true"
+        tabIndex={-1}
+      >
+        <label htmlFor="contact-departamento">Departamento</label>
+        <input
+          id="contact-departamento"
+          name="departamento"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="space-y-2">
         <Label htmlFor="nombre">Nombre</Label>
         <Input
