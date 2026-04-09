@@ -40,6 +40,34 @@ function singleLine(value: string, max: number): string {
   return value.replace(/[\r\n]+/g, " ").trim().slice(0, max);
 }
 
+/** Mensaje seguro para el usuario cuando Resend devuelve errores típicos de configuración. */
+function resendErrorHintForUser(error: unknown): string | null {
+  if (typeof error !== "object" || error === null) return null;
+  const rec = error as { name?: string; message?: string };
+  const name = rec.name ?? "";
+  const message = (rec.message ?? "").toLowerCase();
+
+  if (name === "invalid_from_address") {
+    return "El remitente no está autorizado en Resend: verifica el dominio en resend.com y usa en RESEND_FROM una dirección de ese dominio.";
+  }
+  if (name === "missing_api_key" || name === "invalid_api_Key") {
+    return "La clave de Resend no es válida o no llega al servidor. Revisa RESEND_API_KEY en Vercel y haz redeploy.";
+  }
+  if (name === "rate_limit_exceeded") {
+    return "Demasiados envíos en poco tiempo. Espera unos minutos e inténtalo de nuevo.";
+  }
+  if (
+    name === "validation_error" &&
+    (message.includes("only send") ||
+      message.includes("testing") ||
+      message.includes("verified") ||
+      message.includes("recipient"))
+  ) {
+    return "Resend limita destinatarios hasta verificar el dominio de envío. Verifica studiokodax.com en Resend o usa el correo permitido en modo prueba.";
+  }
+  return null;
+}
+
 export async function sendContactEmail(
   _prev: ContactFormState,
   formData: FormData,
@@ -138,10 +166,18 @@ export async function sendContactEmail(
   });
 
   if (error) {
-    console.error("Resend error:", error);
+    console.error(
+      "Resend error:",
+      typeof error === "object" && error !== null
+        ? JSON.stringify(error)
+        : String(error),
+    );
+    const hint = resendErrorHintForUser(error);
     return {
       ok: false,
-      error: "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.",
+      error:
+        hint ??
+        "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.",
     };
   }
 
