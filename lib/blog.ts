@@ -17,6 +17,14 @@ export type BlogPostMeta = {
 /** Listado del blog (orden: más reciente primero). */
 export const blogPosts: BlogPostMeta[] = [
   {
+    slug: "cuanto-cuesta-web-profesional-2026",
+    title:
+      "¿Cuánto cuesta una web profesional en 2026? Guía de precios y qué incluye",
+    description:
+      "¿Buscas cuánto cuesta una web en 2026? Descubre los precios reales en España para landings, webs corporativas y e-commerce. Evita errores y descubre qué debe incluir una web profesional para ser rentable.",
+    datePublished: "2026-04-14",
+  },
+  {
     slug: "mi-web-no-recibe-visitas",
     title: "Mi web no recibe visitas: cómo lo abordo como profesional",
     description:
