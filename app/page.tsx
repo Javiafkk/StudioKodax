@@ -9,7 +9,9 @@ import { SocialProofSection } from "@/components/home/social-proof-section";
 import { RevealOnView } from "@/components/motion/reveal-on-view";
 
 export const metadata: Metadata = {
-  title: "Inicio",
+  title: {
+    absolute: "Diseño web para negocios en España | StudioKodax",
+  },
   description:
     "Webs nuevas para negocios y autónomos en España, o mejora de tu web si no vende ni posiciona. SEO técnico, velocidad y más consultas desde Google.",
 };
