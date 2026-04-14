@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Menu, Rocket } from "lucide-react";
 
+import { MobileNavDetails } from "@/components/layout/mobile-nav-details";
 import { cn } from "@/lib/utils";
 
 const headerNavBtnBase =
@@ -114,7 +115,7 @@ export function SiteHeader() {
 function MobileNav() {
   return (
     <nav aria-label="Principal móvil" className="md:hidden">
-      <details className="group relative">
+      <MobileNavDetails>
         <summary
           className={cn(
             headerNavBtnBase,
@@ -143,7 +144,7 @@ function MobileNav() {
             </li>
           ))}
         </ul>
-      </details>
+      </MobileNavDetails>
     </nav>
   );
 }
